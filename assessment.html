@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment</title>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Questions</h1>
+        </div>
+    </header>
+    <main>
+        <section id="student-questions">
+            <!-- All questions (MCQs, short, and long answers) will be dynamically loaded here -->
+        </section>
+
+        <section id="actions">
+            <button id="submit-answers">Submit Answers</button>
+        </section>
+    </main>
+    
+    <style> /*---------CSS----------*/
+        
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        h2 {
+            margin-top: 30px;
+            color: #333;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            resize: vertical;
+            font-size: 14px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* Main Content Styles */
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        section {
+            margin-bottom: 30px;
+        }
+
+        #student-questions {
+            padding: 20px;
+        }
+
+        .question-section {
+            margin-bottom: 20px;
+        }
+
+        .question-container {
+            padding: 15px;
+            background-color: #f1f1f1;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        /* Button Styles */
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            color: white;
+        }
+
+        #submit-answers {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .footer-section {
+            width: 30%;
+        }
+
+        .footer-section h2 {
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .footer-section p, .footer-section ul {
+            font-size: 14px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer-section ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 15px 0;
+            background-color: #222;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .social-links li {
+            margin-bottom: 10px;
+        }
+
+        .social-links li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .social-links li a i {
+            margin-right: 8px;
+        }
+
+        .social-links li a:hover {
+            color: #1da1f2; /* For Twitter */
+        }
+
+        .social-links li a i.fa-facebook-f:hover {
+            color: #3b5998; /* Facebook Color */
+        }
+
+        .social-links li a i.fa-linkedin-in:hover {
+            color: #0077b5; /* LinkedIn Color */
+        }
+
+    </style>
+    
+    
+    
+    <script> /*---------JAVASCRIPT-----------*/
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const studentQuestionsContainer = document.getElementById('student-questions');
+            const assessmentData = JSON.parse(localStorage.getItem('assessmentData'));
+        
+            if (!assessmentData) {
+                studentQuestionsContainer.innerHTML = '<p>No questions</p>';
+                return;
+            }
+            if (assessmentData) {
+                sessionStorage.setItem('studentRegisterNo', assessmentData.assessmentName); // Save register number
+                // Display the assessment details
+                const assessmentDetails = `
+                    <h2>Student Details</h2>
+                    <p><strong>Register No: </strong> ${assessmentData.assessmentName}</p>
+                    <p><strong>Subject: </strong> ${assessmentData.subject}</p>
+                    <p><strong>Rules: </strong> ${assessmentData.instructions}</p>
+                `;
+        
+                document.getElementById('student-questions').insertAdjacentHTML('beforebegin', assessmentDetails);
+        
+                // Load MCQs, short answers, and long answers (if needed)
+                // (You can dynamically generate the question forms here if necessary)
+            }
+        
+            // Display MCQs
+            if (assessmentData.mcqs.length > 0) {
+                const mcqSection = document.createElement('div');
+                mcqSection.innerHTML = '<h2>MCQ questions</h2>';
+                assessmentData.mcqs.forEach((mcq, index) => {
+                    const mcqForm = document.createElement('div');
+                    mcqForm.innerHTML = `
+                        <p>${index + 1}. ${mcq.question}</p>
+                        <label><input type="radio" name="mcq-${index}" value="A"> ${mcq.options.A}</label><br>
+                        <label><input type="radio" name="mcq-${index}" value="B"> ${mcq.options.B}</label><br>
+                        <label><input type="radio" name="mcq-${index}" value="C"> ${mcq.options.C}</label><br>
+                        <label><input type="radio" name="mcq-${index}" value="D"> ${mcq.options.D}</label>
+                    `;
+                    mcqSection.appendChild(mcqForm);
+                });
+                studentQuestionsContainer.appendChild(mcqSection);
+            }
+        
+            // Display short answer questions
+            if (assessmentData.shortAnswers.length > 0) {
+                const shortAnswerSection = document.createElement('div');
+                shortAnswerSection.innerHTML = '<h2>2 marks: </h2>';
+                assessmentData.shortAnswers.forEach((shortAnswer, index) => {
+                    const shortAnswerForm = document.createElement('div');
+                    shortAnswerForm.innerHTML = `
+                        <p>${index + 1}. ${shortAnswer.question}</p>
+                        <textarea placeholder="Answer...." name="short-answer-${index}"></textarea>
+                    `;
+                    shortAnswerSection.appendChild(shortAnswerForm);
+                });
+                studentQuestionsContainer.appendChild(shortAnswerSection);
+            }
+        
+            // Display long answer questions
+            if (assessmentData.longAnswers.length > 0) {
+                const longAnswerSection = document.createElement('div');
+                longAnswerSection.innerHTML = '<h2>5 marks</h2>';
+                assessmentData.longAnswers.forEach((longAnswer, index) => {
+                    const longAnswerForm = document.createElement('div');
+                    longAnswerForm.innerHTML = `
+                        <p>${index + 1}. ${longAnswer.question}</p>
+                        <textarea placeholder="Answer...." name="long-answer-${index}"></textarea>
+                    `;
+                    longAnswerSection.appendChild(longAnswerForm);
+                });
+                studentQuestionsContainer.appendChild(longAnswerSection);
+            }
+        
+            // Handle answer submission
+            document.getElementById('submit-answers').addEventListener('click', () => {
+                const studentAnswers = {
+                    mcqs: [],
+                    shortAnswers: [],
+                    longAnswers: []
+                };
+        
+                // Collect MCQ answers
+                assessmentData.mcqs.forEach((mcq, index) => {
+                    const selectedOption = document.querySelector(`input[name="mcq-${index}"]:checked`);
+                    studentAnswers.mcqs.push({
+                        question: mcq.question,
+                        selectedAnswer: selectedOption ? selectedOption.value : 'No answer'
+                    });
+                });
+        
+                // Collect short answer responses
+                assessmentData.shortAnswers.forEach((shortAnswer, index) => {
+                    const shortAnswerText = document.querySelector(`textarea[name="short-answer-${index}"]`).value;
+                    studentAnswers.shortAnswers.push({
+                        question: shortAnswer.question,
+                        answer: shortAnswerText || 'No answer'
+                    });
+                });
+        
+                // Collect long answer responses
+                assessmentData.longAnswers.forEach((longAnswer, index) => {
+                    const longAnswerText = document.querySelector(`textarea[name="long-answer-${index}"]`).value;
+                    studentAnswers.longAnswers.push({
+                        question: longAnswer.question,
+                        answer: longAnswerText || 'No answer'
+                    });
+                });
+                // Store student answers in local storage or session storage
+                sessionStorage.setItem('studentAnswers', JSON.stringify(studentAnswers));
+        
+                // You can now submit studentAnswers to the server or save it locally
+                console.log(studentAnswers); // For debugging, replace this with actual submission logic
+        
+                // Redirect to the evaluation page (if applicable)
+                window.location.href = 'evaluation.html';
+                // Show success message
+                alert('Answers submitted successfully!!');
+            });
+        });
+    
+    </script>
+
+
+
+
+</body>
+</html>

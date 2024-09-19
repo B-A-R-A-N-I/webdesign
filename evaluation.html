@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluation Page</title>
+</head>
+<body>
+    <div class="evaluation-container">
+        <h2>Assessment Evaluation</h2>
+
+        <!-- Student Reg No dynamically inserted -->
+        <p>Student Reg No: <span id="student-reg-no"></span></p>
+
+        <p>Max Marks: 100 <br> MCQ: 10 <br> Short Answer: 20 <br> Long Answer: 70</p>
+
+        <!-- Simulated data fetch -->
+        <div id="student-answers">
+            <!-- Student answers will be dynamically inserted here -->
+        </div>
+        <button class="submit-btn" onclick="submitEvaluation()">Submit Evaluation</button>
+    </div>
+    <div class="evaluation-summary">
+        <p>MCQ: <span id="mcq-score">0</span> / 10</p>
+        <p>Short Answer: <span id="short-answer-score">0</span> / 20</p>
+        <p>Long Answer: <span id="long-answer-score">0</span> / 70</p>
+        <p>Total Marks: <span id="total-marks">0</span> / 100</p>
+        <p>Grade: <span id="grade">N/A</span></p>
+    </div>
+    
+    <style> /*-----------CSS-----------*/
+        body {
+            font-family: Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        
+        header {
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-bottom: 20px;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            border-radius: 10px;
+            border-spacing: 15px;
+        }
+        
+        h2{
+            font-family: Helvetica, sans-serif;
+            background-color: #ff5623;
+            color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+            border-style: dashed;
+            border-radius: 15px;
+        }
+        
+        h3{
+            padding: 20px;
+            text-decoration: underline;
+            background-color: rgb(255, 175, 56);
+            color: #ffffff;
+            border-radius: 10px;
+            border-spacing: 15px;
+        }
+        
+        .evaluation-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .evaluation-summary{
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .question {
+            margin-bottom: 50px;
+            padding: 20px;
+        }
+        
+        .question label {
+            display: block;
+            font-weight: bold;
+        }
+        
+        .answer {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #fff9c0;
+            border-radius: 4px;
+            
+        }
+        
+        .file-upload {
+            margin-top: 10px;
+        }
+        
+        .score {
+            margin-top: 5px;
+        }
+        
+        .score input {
+            width: 50px;
+        }
+        
+        .submit-btn {
+            background-color: #3d80e5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 4px;
+            
+        }
+        
+        .submit-btn:hover {
+            background-color: #1967dc;
+        }
+        
+        .textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: #fff9c0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+        
+        .correctAnswer{
+            background-color: rgb(117, 255, 117);
+        }
+    </style>
+    
+    
+    
+    <script> /*----------JAVASCRIPT-----------*/
+        
+        // Function to retrieve data from sessionStorage
+        function retrieveStudentAnswers() {
+            const studentAnswers = JSON.parse(sessionStorage.getItem('studentAnswers'));
+            
+            // Check if data is available in sessionStorage
+            if (!studentAnswers) {
+                alert('No student answers available.');
+                return null;
+            }
+        
+            return studentAnswers;
+        }
+    
+        // Retrieve and display student register number
+        function displayStudentRegisterNo() {
+            const registerNo = sessionStorage.getItem('studentRegisterNo');
+            if (registerNo) {
+                document.querySelector('p').textContent = `Student Reg No: ${registerNo}`;
+            }
+        }
+
+        // Call this function after page load
+        document.addEventListener('DOMContentLoaded', displayStudentRegisterNo);
+
+        // Function to display student answers
+        function displayStudentAnswers() {
+            const studentAnswers = retrieveStudentAnswers(); // Retrieve answers from sessionStorage
+
+            if (!studentAnswers) return; // Exit if no answers found
+
+            const container = document.getElementById("student-answers");
+            let htmlContent = "";
+
+            // Display MCQ Questions
+            htmlContent += "<h3>MCQ Questions</h3>";
+            studentAnswers.mcqs.forEach((q, index) => {
+                htmlContent += `<div class="question">
+                    <label>${index + 1}: ${q.question}</label>
+                    <div class="answer">${q.selectedAnswer}</div>
+                    <div class="score">Marks <input class="mcq-score" type="number" min="0" max="1" step="1" value="${q.selectedAnswer === q.correctAnswer ? 1 : 0}"></div>
+                </div>`;
+            });
+
+            // Display 2 Marks Questions
+            htmlContent += "<h3> Short Answer </h3>";
+            studentAnswers.shortAnswers.forEach((q, index) => {
+                htmlContent += `<div class="question">
+                    <label>${index + 1}: ${q.question}</label>
+                    <textarea class="textarea" rows="3" readonly>${q.answer}</textarea>
+                    <div class="score">Marks <input class="short-answer-score"type="number" min="0" max="2" step="1"></div>
+                </div>`;
+            });
+
+            // Display 5 Marks Questions
+            htmlContent += "<h3> Long Answer </h3>";
+            studentAnswers.longAnswers.forEach((q, index) => {
+                htmlContent += `<div class="question">
+                    <label>${index + 1}: ${q.question}</label>
+                    <textarea class="textarea" rows="20" readonly>${q.answer}</textarea>
+                    <div class="score">Marks <input class="long-answer-score" type="number" min="0" max="14" step="1"></div>
+                </div>`;
+            });
+            
+            container.innerHTML = htmlContent;
+        }
+        
+        
+        function calculateTotalMarks() {
+            const mcqMarks = document.querySelectorAll('.mcq-score');
+            const shortAnswerMarks = document.querySelectorAll('.short-answer-score');
+            const longAnswerMarks = document.querySelectorAll('.long-answer-score');
+
+            let mcqTotal = 0, shortAnswerTotal = 0, longAnswerTotal = 0;
+
+            // Sum MCQ scores
+            mcqMarks.forEach(input => mcqTotal += parseFloat(input.value) || 0);
+
+            // Sum Short Answer scores
+            shortAnswerMarks.forEach(input => shortAnswerTotal += parseFloat(input.value) || 0);
+
+            // Sum Long Answer scores
+            longAnswerMarks.forEach(input => longAnswerTotal += parseFloat(input.value) || 0);
+
+            // Calculate total marks
+            const totalMarks = mcqTotal + shortAnswerTotal + longAnswerTotal;
+
+            // Display marks in the summary
+            document.getElementById('mcq-score').textContent = mcqTotal;
+            document.getElementById('short-answer-score').textContent = shortAnswerTotal;
+            document.getElementById('long-answer-score').textContent = longAnswerTotal;
+            document.getElementById('total-marks').textContent = totalMarks;
+
+            // Calculate and display grade
+            const grade = calculateGrade(totalMarks);
+            document.getElementById('grade').textContent = grade;
+        }
+        
+
+        // Function to calculate grade based on total marks
+        function calculateGrade(totalMarks) {
+            if (totalMarks >= 90) {
+                return 'A+';
+            } else if (totalMarks >= 80) {
+                return 'A';
+            } else if (totalMarks >= 70) {
+                return 'B+';
+            } else if (totalMarks >= 60) {
+                return 'B';
+            } else if (totalMarks >= 50) {
+                return 'C';
+            } else {
+                return 'Fail';
+            }
+        }
+        // Call function to display student answers
+        displayStudentAnswers();
+
+        // Function to handle form submission
+        function submitEvaluation() {
+            calculateTotalMarks();
+            alert("Evaluation submitted successfully!");
+            // Here, you would typically send the evaluated scores to a backend server
+        }
+
+    </script>
+
+
+</body>
+</html>

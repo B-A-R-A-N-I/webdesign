@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<style> /*----------CSS-----------*/
+
+    /* General Styles */
+/* General Styles */
+body {
+    font-family: Georgia, serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('assets/images/background.jpg'); /* Replace with your background image path */
+    background-size: cover; /* Ensure the image covers the entire page */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent repeating the image */
+    background-color: #f0f4f8; /* Fallback color */
+}
+
+/* Style for the header with a background image */
+header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/header-background.jpg');
+    background-size: cover; /* Or try contain or auto */
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 150px;
+    color: rgb(76, 223, 174);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Header content to ensure h1 styling */
+.header-content h1 {
+    font-size: 2.5rem; /* Adjust the font size */
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for readability */
+    margin: 0;
+    padding: 0;
+}
+
+
+.header-content {
+    position: relative;
+    z-index: 2;
+}
+
+main {
+    padding: 20px;
+    max-width: 1000px;
+    margin: auto;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: 500;
+    color: #333;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+input[type="text"], select {
+    height: 42px;
+}
+
+textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+button {
+    background-color: #0288d1; /* Blue */
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 6px 4px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover, button:focus {
+    background-color: #0277bd; /* Darker Blue */
+    transform: translateY(-2px);
+}
+
+button:active {
+    background-color: #026aa7; /* Even Darker Blue */
+    transform: translateY(1px);
+}
+
+button#add-mcq, button#add-short-answer, button#add-long-answer {
+    background-color: #f57c00; /* Orange */
+}
+
+button#add-mcq:hover, button#add-short-answer:hover, button#add-long-answer:hover {
+    background-color: #ef6c00; /* Darker Orange */
+}
+
+button#add-mcq:active, button#add-short-answer:active, button#add-long-answer:active {
+    background-color: #e64a19; /* Even Darker Orange */
+    transform: translateY(1px);
+}
+
+button#save-draft {
+    background-color: #ffa000; /* Amber */
+}
+
+button#save-draft:hover {
+    background-color: #ff8f00; /* Darker Amber */
+}
+
+button#save-draft:active {
+    background-color: #ff6f00; /* Even Darker Amber */
+    transform: translateY(1px);
+}
+
+button#publish {
+    background-color: #43a047; /* Green */
+}
+
+button#publish:hover {
+    background-color: #388e3c; /* Darker Green */
+}
+
+button#publish:active {
+    background-color: #2c6b2f; /* Even Darker Green */
+    transform: translateY(1px);
+}
+
+button#cancel {
+    background-color: #d32f2f; /* Red */
+}
+
+button#cancel:hover {
+    background-color: #c62828; /* Darker Red */
+}
+
+button#cancel:active {
+    background-color: #b71c1c; /* Even Darker Red */
+    transform: translateY(1px);
+}
+
+.question-container {
+    margin-bottom: 25px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+    position: relative;
+}
+
+.remove-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #d32f2f; /* Red */
+    color: #ffffff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.remove-button:hover, .remove-button:focus {
+    background-color: #c62828; /* Darker Red */
+    transform: translateY(-2px);
+}
+
+.remove-button:active {
+    background-color: #b71c1c; /* Even Darker Red */
+    transform: translateY(1px);
+}footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.footer-section {
+    width: 30%;
+}
+
+.footer-section h2 {
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.footer-section p, .footer-section ul {
+    font-size: 14px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 15px 0;
+    background-color: #222;
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+}
+
+.social-links li {
+    margin-bottom: 10px;
+}
+
+.social-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.social-links li a i {
+    margin-right: 8px;
+}
+
+.social-links li a:hover {
+    color: #1da1f2; /* For Twitter */
+}
+
+.social-links li a i.fa-facebook-f:hover {
+    color: #3b5998; /* Facebook Color */
+}
+
+.social-links li a i.fa-linkedin-in:hover {
+    color: #0077b5; /* LinkedIn Color */
+}
+
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+header {
+    background: #4CAF50;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+#faculty-name-display {
+    font-weight: bold;
+}
+
+main {
+    padding: 20px;
+}
+
+</style>
+
+
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Faculty</h1>
+               <h1>Welcome, <span id="faculty-name-display">Faculty</span>!</h1>
+            <!-- நெவிகேஷன் லிங்குகள் can be added here if needed -->
+        </div>
+    </header>
+    
+
+    <main>
+        <section id="assessment-details">
+            
+            <h2>Details</h2>
+            <label for="assessment-name">Register no: </label>
+            <input type="text" id="assessment-name" placeholder="Enter student reg....">
+            
+            <label for="subject">Subject:</label>
+            <select id="subject">
+                <option value="english">English</option>
+                <option value="science">Botany</option>
+                <option value="science">Physics</option>
+                <option value="science">Chemistry</option>
+                <option value="science">Zoology</option>
+                
+                <!-- தேவைப்பட்டால் மேலும் பாடங்களைச் சேர்க்கவும் -->
+            </select>
+
+           
+            <label for="instructions">Rules</label>
+            <textarea id="instructions" placeholder="Enter the rules...."></textarea>
+        </section>
+
+        <section id="questions">
+            <h2>MCQ: </h2>
+            <button id="add-mcq">add questions....</button>
+            <div id="mcq-container"></div>
+
+            <h2>2 marks: </h2>
+            <button id="add-short-answer">add questions....</button>
+            <div id="short-answer-container"></div>
+
+            <h2>5 marks: </h2>
+            <button id="add-long-answer">add questions....</button>
+            <div id="long-answer-container"></div>
+        </section>
+
+        <section id="actions">
+            <button id="save-draft">Save Draft</button>
+            <button id="publish">Publish</button>
+            <button id="cancel">Cancel</button>
+        </section>
+    </main>
+
+
+<script> /*---------JAVASCRIPT----------*/
+
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        const mcqContainer = document.getElementById('mcq-container');
+        const shortAnswerContainer = document.getElementById('short-answer-container');
+        const longAnswerContainer = document.getElementById('long-answer-container');
+    
+        // Adding MCQs
+        document.getElementById('add-mcq').addEventListener('click', () => {
+            const mcqForm = document.createElement('div');
+            mcqForm.innerHTML = `
+                <label>Question:</label>
+                <textarea placeholder="add question...."></textarea>
+                <label>Option A:</label>
+                <input type="text" placeholder="Answer 1">
+                <label>Option B:</label>
+                <input type="text" placeholder="Answer 2">
+                <label>Option C:</label>
+                <input type="text" placeholder="Answer 3">
+                <label>Option D:</label>
+                <input type="text" placeholder="Answer 4">
+                <label>Correct answer...</label>
+                <select>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                </select>
+            `;
+            mcqContainer.appendChild(mcqForm);
+        });
+    
+        // Adding short answer questions
+        document.getElementById('add-short-answer').addEventListener('click', () => {
+            const shortAnswerForm = document.createElement('div');
+            shortAnswerForm.innerHTML = `
+                <label>Question: </label>
+                <textarea placeholder="Add the question..."></textarea>
+            `;
+            shortAnswerContainer.appendChild(shortAnswerForm);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const facultyNameDisplay = document.getElementById('faculty-name-display');
+            
+            // Retrieve the faculty name from localStorage
+            const facultyName = localStorage.getItem('facultyName');
+            
+            if (facultyName) {
+                facultyNameDisplay.textContent = facultyName;
+            } else {
+                facultyNameDisplay.textContent = 'Faculty'; // Fallback if no name is found
+            }
+        });
+        
+        
+    
+        // Adding long answer questions
+        document.getElementById('add-long-answer').addEventListener('click', () => {
+            const longAnswerForm = document.createElement('div');
+            longAnswerForm.innerHTML = `
+                <label>Question:</label>
+                <textarea placeholder="Add the question..."></textarea>
+            `;
+            longAnswerContainer.appendChild(longAnswerForm);
+        });
+    
+        // Publishing the questions
+        document.getElementById('publish').addEventListener('click', () => {
+            // Collect the assessment details (name, subject, and instructions)
+            const assessmentName = document.getElementById('assessment-name').value;
+            const subject = document.getElementById('subject').value;
+            const instructions = document.getElementById('instructions').value;
+    
+            // Collect questions
+            const assessmentData = {
+                assessmentName: assessmentName,
+                subject: subject,
+                instructions: instructions,
+                mcqs: [],
+                shortAnswers: [],
+                longAnswers: []
+            };
+    
+            // Collect MCQs
+            mcqContainer.querySelectorAll('div').forEach(mcq => {
+                assessmentData.mcqs.push({
+                    question: mcq.querySelector('textarea').value,
+                    options: {
+                        A: mcq.querySelector('input[placeholder="Answer 1"]').value,
+                        B: mcq.querySelector('input[placeholder="Answer 2"]').value,
+                        C: mcq.querySelector('input[placeholder="Answer 3"]').value,
+                        D: mcq.querySelector('input[placeholder="Answer 4"]').value
+                    },
+                    correctAnswer: mcq.querySelector('select').value
+                });
+            });
+    
+            // Collect short answers
+            shortAnswerContainer.querySelectorAll('div').forEach(shortAnswer => {
+                assessmentData.shortAnswers.push({
+                    question: shortAnswer.querySelector('textarea').value
+                });
+            });
+    
+            // Collect long answers
+            longAnswerContainer.querySelectorAll('div').forEach(longAnswer => {
+                assessmentData.longAnswers.push({
+                    question: longAnswer.querySelector('textarea').value
+                });
+            });
+    
+            // Store all assessment data in localStorage
+            localStorage.setItem('assessmentData', JSON.stringify(assessmentData));
+    
+            // Redirect to student page
+            window.location.href = 'assessment.html';
+        });
+    });
+    
+</script>
+    
+</body>
+</html>
