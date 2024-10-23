@@ -233,7 +233,7 @@
             // Display MCQs
             if (assessmentData.mcqs.length > 0) {
                 const mcqSection = document.createElement('div');
-                mcqSection.innerHTML = '<h2>MCQ questions</h2>';
+                mcqSection.innerHTML = '<h2>MCQ questions:</h2>';
                 assessmentData.mcqs.forEach((mcq, index) => {
                     const mcqForm = document.createElement('div');
                     mcqForm.innerHTML = `
@@ -251,7 +251,7 @@
             // Display short answer questions
             if (assessmentData.shortAnswers.length > 0) {
                 const shortAnswerSection = document.createElement('div');
-                shortAnswerSection.innerHTML = '<h2>2 marks: </h2>';
+                shortAnswerSection.innerHTML = '<h2>Short Answer:</h2>';
                 assessmentData.shortAnswers.forEach((shortAnswer, index) => {
                     const shortAnswerForm = document.createElement('div');
                     shortAnswerForm.innerHTML = `
@@ -266,7 +266,7 @@
             // Display long answer questions
             if (assessmentData.longAnswers.length > 0) {
                 const longAnswerSection = document.createElement('div');
-                longAnswerSection.innerHTML = '<h2>5 marks</h2>';
+                longAnswerSection.innerHTML = '<h2>Long Answer:</h2>';
                 assessmentData.longAnswers.forEach((longAnswer, index) => {
                     const longAnswerForm = document.createElement('div');
                     longAnswerForm.innerHTML = `
@@ -312,23 +312,36 @@
                         answer: longAnswerText || 'No answer'
                     });
                 });
-                // Store student answers in local storage or session storage
-                sessionStorage.setItem('studentAnswers', JSON.stringify(studentAnswers));
-        
-                // You can now submit studentAnswers to the server or save it locally
-                console.log(studentAnswers); // For debugging, replace this with actual submission logic
-        
-                // Redirect to the evaluation page (if applicable)
-                window.location.href = 'evaluation.html';
-                // Show success message
-                alert('Answers submitted successfully!!');
+                // Prepare data to send
+                const dataToSend = {
+                    registerNo: assessmentData.assessmentName, // Assuming 'assessmentName' is the register number
+                    answers: studentAnswers
+                };
+
+                // Send data to backend server
+                fetch('http://localhost:3000/save-answers', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dataToSend)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    alert('Answers submitted successfully!!');
+                    // Redirect to the evaluation page (if applicable)
+                    window.location.href = 'evaluation.html';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('There was an error submitting your answers.');
+                });
             });
         });
-    
     </script>
 
 
-
-
+    
 </body>
 </html>

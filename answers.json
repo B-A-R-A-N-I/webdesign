@@ -1,0 +1,154 @@
+{
+  "1234": {
+    "mcqs": [
+      {
+        "question": "adliuoaisdioas",
+        "selectedAnswer": "B"
+      }
+    ],
+    "shortAnswers": [
+      {
+        "question": "skjdghkjashdkah",
+        "answer": "ghkjhkjhkjkjhkjh"
+      }
+    ],
+    "longAnswers": [
+      {
+        "question": "sdkashkdhasidhiashd",
+        "answer": "dhgjasgudgasuidguias"
+      }
+    ]
+  },
+  "5529713": {
+    "mcqs": [
+      {
+        "question": "The principle based on which a solar cell operates is,",
+        "selectedAnswer": "A"
+      },
+      {
+        "question": "A toaster operating at 240V has resistance of 120 ohm. Its power is:",
+        "selectedAnswer": "C"
+      },
+      {
+        "question": "Atomic number of H - like atom with ionization potential 122.4 V for n=1 is,",
+        "selectedAnswer": "B"
+      },
+      {
+        "question": "The transcerse nature of light is shown in,",
+        "selectedAnswer": "C"
+      },
+      {
+        "question": "The speed of light in an isotropic medium depends on,",
+        "selectedAnswer": "C"
+      },
+      {
+        "question": "The threshold wavelength for a metal surface whose photoelectric work function is 3.313 eV,",
+        "selectedAnswer": "C"
+      },
+      {
+        "question": "Light transmitted by Nicol prism is,",
+        "selectedAnswer": "A"
+      },
+      {
+        "question": "The gravitational waves were theoretically proposed by,",
+        "selectedAnswer": "A"
+      },
+      {
+        "question": "The value of forbidden energy gap for Si at room temperature is,",
+        "selectedAnswer": "C"
+      },
+      {
+        "question": "Two identical conducting balls having positive charges q1 and q2 are separated by a center to center distance 'r'. If they are made to touch each other and then separated to the same distance, the force between them will be,",
+        "selectedAnswer": "C"
+      }
+    ],
+    "shortAnswers": [
+      {
+        "question": "What is meant by Hysteresis?",
+        "answer": "Lagging Behind"
+      },
+      {
+        "question": "State Malus' Law.",
+        "answer": "The intensity of the transmitted light varies as the square of the cosine of the angle between the two planes of transmission."
+      },
+      {
+        "question": "Define Electrostatic Potential.",
+        "answer": "The amount of work done to move a unit charge from a reference point to a specific point inside the field without producing an acceleration. The SI unit of electrostatic potential is volt."
+      },
+      {
+        "question": "State the applications of Seebeck Effect.",
+        "answer": "The Seebeck effect is a phenomenon in which a temperature difference between two dissimilar electrical conductors or semiconductors produces a voltage difference between the two substances."
+      },
+      {
+        "question": "What are Electromagnetic Waves?",
+        "answer": "Electromagnetic waves are a form of radiation that travel though the universe. They are formed when an electric field couples with a magnetic field. "
+      },
+      {
+        "question": "What is meant by biasing? Mention its types.",
+        "answer": "Biasing is the process of providing DC voltage which helps in the functioning of the circuit. A transistor is based in order to make the emitter base junction forward biased and collector base junction reverse biased, so that it maintains in active region, to work as an amplifier.\n\n1. Forward\n2. Reverse"
+      },
+      {
+        "question": "Define Ampere.",
+        "answer": "The ampere is a measure of the amount of electric charge in motion per unit time ― that is, electric current. But the quantity of electric charge by itself, whether in motion or not, is expressed by another SI unit, the coulomb (C)."
+      },
+      {
+        "question": "Give the principle of AC generator.",
+        "answer": "The principle behind an AC generator is electromagnetic induction, which states that a current-carrying conductor generates voltage when it cuts a uniform magnetic field."
+      },
+      {
+        "question": "Define work function of a metal. Give its unit",
+        "answer": "The minimum energy needed for an electron to escape from the metal surface is called the work function of that metal. Its unit is electron volt (eV)."
+      },
+      {
+        "question": "What are logic gates?",
+        "answer": "A logic gate is a device that acts as a building block for digital circuits. They perform basic logical functions that are fundamental to digital circuits. Most electronic devices we use today will have some form of logic gates in them. For example, logic gates can be used in digital electronics such as smartphones and tablets or in memory devices."
+      }
+    ],
+    "longAnswers": [
+      {
+        "question": "Derive the equation for effective focal length for lenses in contact.",
+        "answer": "1/F = 1/f1 + 1/f2"
+      },
+      {
+        "question": "Obatin Gauss law from Coulomb's law.",
+        "answer": "As E and ds are vectors.\n∫\n→\nE\n.\n→\nd\ns\n=\nq\nε\n0\n. This is Gauss.s law.\n"
+      },
+      {
+        "question": "Explain the determination of unknown resistance using metre bridge.",
+        "answer": "Sliding the jockey at different positions of the wire, the null point is obtained. It works on the principle of Wheatstone bridge. So, the unknown resistance is obtained by applying the metre bridge formula,  S=Rl1(100-l1) , where l1 is the distance of the wire from one end where the balanced position is obtained."
+      },
+      {
+        "question": "Obtain Einstein's photoelectric equation with necessary explanations.",
+        "answer": "Einstein resolved this problem using Planck’s revolutionary idea that light was a particle. The energy carried by each particle of light (called quanta or photon) is dependent on the light’s frequency (ν) as shown:\n\nE = hν\n\nWhere h = Planck’s constant = 6.6261 × 10-34 Js.\n\nSince light is bundled up into photons, Einstein theorized that when a photon falls on the surface of a metal, the entire photon’s energy is transferred to the electron.\n\nA part of this energy is used to remove the electron from the metal atom’s grasp and the rest is given to the ejected electron as kinetic energy. Electrons emitted from underneath the metal surface lose some kinetic energy during the collision. But the surface electrons carry all the kinetic energy imparted by the photon and have the maximum kinetic energy."
+      },
+      {
+        "question": "Explain the Maxwell's modification for Ampere's circuital law.",
+        "answer": "Einstein resolved this problem using Planck’s revolutionary idea that light was a particle. The energy carried by each particle of light (called quanta or photon) is dependent on the light’s frequency (ν) as shown:\n\nE = hν\n\nWhere h = Planck’s constant = 6.6261 × 10-34 Js.\n\nSince light is bundled up into photons, Einstein theorized that when a photon falls on the surface of a metal, the entire photon’s energy is transferred to the electron.\n\nA part of this energy is used to remove the electron from the metal atom’s grasp and the rest is given to the ejected electron as kinetic energy. Electrons emitted from underneath the metal surface lose some kinetic energy during the collision. But the surface electrons carry all the kinetic energy imparted by the photon and have the maximum kinetic energy."
+      }
+    ]
+  },
+  "810023622046": {
+    "mcqs": [
+      {
+        "question": "sdasdasdsad?",
+        "selectedAnswer": "B"
+      },
+      {
+        "question": "aasdasd?",
+        "selectedAnswer": "C"
+      }
+    ],
+    "shortAnswers": [
+      {
+        "question": "sadasda?",
+        "answer": "qwdasdasd"
+      }
+    ],
+    "longAnswers": [
+      {
+        "question": "khkkjhkkjh?",
+        "answer": "sdasdasda"
+      }
+    ]
+  }
+}
